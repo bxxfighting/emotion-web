@@ -61,6 +61,7 @@ const component = ({ filter, labelList, statusList,
                 <span style={{marginLeft: 10, marginRight: 5}}>关键词: </span>
                 <Input
                     allowClear
+                    value={filter.keyword}
                     style={{width: 200}}
                     onChange={(e)=>{
                         setCommentFilterKeyword(e.target.value)

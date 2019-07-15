@@ -39,6 +39,7 @@ const component = ({ filter, statusList,
                 <Input
                     allowClear
                     style={{width: 200}}
+                    value={filter.keyword}
                     onChange={(e)=>{
                         setStopwordFilterKeyword(e.target.value)
                         getStopwordList();

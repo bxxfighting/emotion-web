@@ -7,6 +7,7 @@ const { Option } = Select;
 const component = ({ dataList, isFetch, pageNum, pageSize, total, labelList,
     getCommentList,
     updateComment,
+    checkComment,
     setCommentListFetch,
     setCommentPageNum,
     setCommentPageSize,
@@ -36,6 +37,7 @@ const component = ({ dataList, isFetch, pageNum, pageSize, total, labelList,
         id: dataList[i].id,
         comment: dataList[i].comment,
         label: dataList[i].label,
+        status: dataList[i].status,
         key: dataList[i].id,
       }
     )
@@ -70,6 +72,17 @@ const component = ({ dataList, isFetch, pageNum, pageSize, total, labelList,
         dataIndex: 'operate',
         key: 'operate',
         render: (text, record) => {
+          let disabled = record.status === 10?false:true;
+          return (
+            <Button
+              disabled={disabled}
+              onClick={()=>{
+                checkComment(record.id);
+              }}
+            >
+              确认校验
+            </Button>
+          )
         }
     },
   ]

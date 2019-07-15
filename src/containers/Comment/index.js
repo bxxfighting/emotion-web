@@ -3,6 +3,7 @@ import Comment from '../../components/Comment';
 import {
     getCommentList,
     updateComment,
+    checkComment,
     setCommentListFetch,
     setCommentPageNum,
     setCommentPageSize,
@@ -25,6 +26,7 @@ const mapDispatchToProps = dispatch => ({
     setCommentPageNum: (data) => dispatch(setCommentPageNum(data)),
     setCommentPageSize: (data) => dispatch(setCommentPageSize(data)),
     updateComment: (id, label) => dispatch(updateComment(id, label)),
+    checkComment: (id) => dispatch(checkComment(id)),
 });
 
 export default connect(

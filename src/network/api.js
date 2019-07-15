@@ -26,6 +26,7 @@ module.exports = {
     // 评价
     apiCommentList: '/api/v1/dataset/comment/list/',
     apiCommentUpdate: '/api/v1/dataset/comment/update/',
+    apiCommentCheck: '/api/v1/dataset/comment/check/',
     // 停止词
     apiStopwordList: '/api/v1/dataset/stopword/list/',
     apiStopwordCreate: '/api/v1/dataset/stopword/create/',

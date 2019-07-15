@@ -3,11 +3,23 @@ import { Select, Row, Col, Input } from 'antd';
 
 const Option = Select.Option;
 
-const component = ({ filter, labelList,
+const component = ({ filter, labelList, statusList,
     getCommentList,
     setCommentFilterKeyword,
     setCommentFilterLabel,
+    setCommentFilterStatus,
  }) => {
+  let statusOptions = [];
+  for (let i in statusList) {
+      statusOptions.push(
+          <Option
+            key={statusList[i].id}
+            value={statusList[i].id}
+          >
+              {statusList[i].name}
+          </Option>
+      );
+  }
   let labels = labelList;
   let labelOptions = [];
   for (let i in labels) {
@@ -34,6 +46,17 @@ const component = ({ filter, labelList,
                     }}
                 >
                     {labelOptions}
+                </Select>
+                <span style={{marginLeft: 10, marginRight: 5}}>状态: </span>
+                <Select
+                    value={filter.status}
+                    style={{minWidth: 200}}
+                    onChange={(value)=>{
+                        setCommentFilterStatus(value);
+                        getCommentList();
+                    }}
+                >
+                    {statusOptions}
                 </Select>
                 <span style={{marginLeft: 10, marginRight: 5}}>关键词: </span>
                 <Input

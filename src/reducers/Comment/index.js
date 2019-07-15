@@ -6,6 +6,7 @@ import {
     SET_COMMENT_TOTAL,
     SET_COMMENT_FILTER_KEYWORD,
     SET_COMMENT_FILTER_LABEL,
+    SET_COMMENT_FILTER_STATUS,
 } from '../../constants/action';
 
 const initLabelList = [
@@ -22,15 +23,31 @@ const initLabelList = [
         'name': '负面评论',
     },
 ]
+const initStatusList = [
+    {
+        'id': 0,
+        'name': '全部',
+    },
+    {
+        'id': 10,
+        'name': '未校验',
+    },
+    {
+        'id': 20,
+        'name': '已校验',
+    },
+]
 
 const initFilter = {
     keyword: '',
     label: 0,
+    status: 0,
 }
 
 const initState = {
     dataList: [],
     labelList: initLabelList,
+    statusList: initStatusList,
     isFetch: true,
     filter: initFilter,
     pageNum: 1,
@@ -40,6 +57,13 @@ const initState = {
 
 const reducer = (state = initState, action) => {
     switch(action.type) {
+        case SET_COMMENT_FILTER_STATUS:
+            return Object.assign({}, state, {
+                filter: {
+                    ...state.filter,
+                    status: action.data,
+                }
+            })
         case SET_COMMENT_FILTER_LABEL:
             return Object.assign({}, state, {
                 filter: {

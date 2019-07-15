@@ -2,6 +2,7 @@ import request from '../../network/request';
 import { 
     apiCommentList,
     apiCommentUpdate,
+    apiCommentCheck,
 } from '../../network/api';
 import {
     SET_COMMENT_LIST,
@@ -11,9 +12,14 @@ import {
     SET_COMMENT_TOTAL,
     SET_COMMENT_FILTER_KEYWORD,
     SET_COMMENT_FILTER_LABEL,
+    SET_COMMENT_FILTER_STATUS,
 } from '../../constants/action';
 
 
+export const setCommentFilterStatus = (data) => ({
+    type: SET_COMMENT_FILTER_STATUS,
+    data: data,
+})
 export const setCommentFilterLabel = (data) => ({
     type: SET_COMMENT_FILTER_LABEL,
     data: data,
@@ -50,6 +56,7 @@ export const getCommentList = () => {
             body: JSON.stringify({
                 page_num: state.comment.pageNum,
                 page_size: state.comment.pageSize,
+                status: state.comment.filter.status,
                 label: state.comment.filter.label,
                 keyword: state.comment.filter.keyword,
             }),
@@ -76,6 +83,25 @@ export const updateComment = (id, label) => {
             }),
         }
         return request(apiCommentUpdate, option, dispatch, getState)
+                .then(
+                    data => {
+                        if (data.errno === 0) {
+                            dispatch(getCommentList());
+                        }
+                    }
+                )
+    }
+}
+export const checkComment = (id) => {
+    return (dispatch, getState) => {
+        const state = getState();
+        const option = {
+            method: 'POST',
+            body: JSON.stringify({
+                id: id,
+            }),
+        }
+        return request(apiCommentCheck, option, dispatch, getState)
                 .then(
                     data => {
                         if (data.errno === 0) {
